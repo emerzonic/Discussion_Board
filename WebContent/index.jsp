@@ -32,31 +32,17 @@
     </form>
   </div>
 </nav>
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Join The Discussion</h1>
-    <p class="lead">Spring MVC and Hibernate Web Application.</p>
-  </div>
-</div>
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 			<div class="col">
 					<div class="content">
-						<c:forEach var="post" items="${posts}">
-								<div class="media">
-									<div class="media-body">
-										<h5 class="mt-0 mb-1">${ post.title } ${ post.date }</h5>
-										<p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-										scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-										vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-										nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-										</p>
-										
-										<button type="button" class="btn btn-success">Read More</button>
-										
-									</div>
-								</div>
-						</c:forEach>
+						<div class="jumbotron">
+							  <h1 class="display-4">Welcome! Join the Discussion</h1>
+							  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+							  <hr class="my-4">
+							  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+							  <a class="btn btn-primary btn-lg" href="post/list" role="button">Join The Conversation</a>
+							</div>
 				</div>
 			</div>
 	</div>

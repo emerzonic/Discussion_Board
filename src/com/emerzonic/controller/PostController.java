@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.emerzonic.dao.PostDAO;
@@ -18,17 +21,26 @@ public class PostController {
 	private PostDAO postDAO;
 	
 	
-	@RequestMapping("/list")
+	@GetMapping("/list")
 	public String showPosts(Model model) {
 		//get posts from DAO
 		List<Post> posts = postDAO.getAllPosts();
-		
-		
-		//add posts to modal
 		model.addAttribute("posts", posts);
-		
-		//pass to view
 		return "show-posts";
 	}
-
+	
+	
+	@GetMapping("/showPostForm")
+	public String showPostForm(Model model) {
+		Post post = new Post();
+		model.addAttribute("post", post);
+		return "post-form";
+	}
+	
+	
+	@PostMapping("/addPost")
+	public String addPost(@ModelAttribute("post") Post post) {
+		
+		return "redirect:/post/list";
+	}
 }
