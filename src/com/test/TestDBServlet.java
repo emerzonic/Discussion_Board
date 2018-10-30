@@ -30,7 +30,7 @@ public class TestDBServlet extends HttpServlet {
 			String jdbcUrl = "jdbc:mysql://localhost:8889/discussion_board_db?useSSL=false&serverTimezone=UTC";
 			String driver = "com.mysql.cj.jdbc.Driver";
 			
-			//test connection
+			//test connection to db
 			try {
 				PrintWriter out = response.getWriter();
 				out.println("Connecting to database "+ jdbcUrl);
