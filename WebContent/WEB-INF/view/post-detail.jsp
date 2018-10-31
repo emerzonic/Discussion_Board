@@ -40,25 +40,37 @@
 </div>
 <div class="container">
 	<div class="row">
-			<div class="col">
+		<div class="col">
 					<div class="content">
-						<c:forEach var="post" items="${posts}">
-						<c:url var="readMoreLink" value="/post/getPost">										
+						<!-- set up edit link for post -->
+						<c:url var="addCommentLink" value="/post/getPost">
+							<c:param name="command" value="COMMENT"/>										
 							<c:param name="postId" value="${post.id}"/>
 						</c:url>
-								<div class="media">
-									<div class="media-body">
-										<div>
-											<h5 class="mt-0 mb-1">${ post.title } ${ post.date }</h5>
-										</div>
-										<div>
-											<p class="post-detail">${ post.text}</p>
-										</div>
-											
-										<a href="${readMoreLink}"><button type="button" class="btn btn-success">Read More</button></a>
-									</div>
-								</div>
-						</c:forEach>
+						<c:url var="editPostLink" value="/post/getPost">
+							<c:param name="command" value="EDIT"/>										
+							<c:param name="postId" value="${post.id}"/>
+						</c:url>
+						<!-- set up delete link for post -->
+						<c:url var="deletePostLink" value="/post/getPost">
+							<c:param name="command" value="DELETE"/>
+							<c:param name="postId" value="${post.id}"/>
+						</c:url>
+						
+						<!--Post details displays here-->						
+						 <div class="card border-info mb-3">
+						  <div class="card-header">Post Detail</div>
+						  <div class="card-body text-info">
+						    <h5 class="card-title">${post.title}</h5>
+						    <hr>
+						    <p class="card-text">${post.text} </p>
+						    <hr>
+						    <a href="${pageContext.request.contextPath}/post/list"><button type="button" class="btn btn-secondary btn-sm">Back To Posts</button></a>
+							<a href="${addCommentLink}"><button type="button" class="btn btn-primary btn-sm">Add Comment</button></a>
+							<a href="${deletePostLink}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
+							<a href="${editPostLink}"><button type="button" class="btn btn-warning btn-sm">Edit</button></a>
+						  </div>
+						</div>
 				</div>
 			</div>
 	</div>

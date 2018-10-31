@@ -8,4 +8,8 @@ public interface PostDAO {
 	
 	public List<Post> getAllPosts();
 
+	public void addPost(Post post);
+
+	public Post getPost(int postId);
+
 }

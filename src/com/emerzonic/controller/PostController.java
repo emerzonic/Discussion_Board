@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.emerzonic.dao.PostDAO;
 import com.emerzonic.entity.Post;
@@ -40,6 +41,28 @@ public class PostController {
 	
 	@PostMapping("/addPost")
 	public String addPost(@ModelAttribute("post") Post post) {
+		postDAO.addPost(post);
+		return "redirect:/post/list";
+	}
+	
+	
+	@GetMapping("/getPost")
+	public String getPost(@RequestParam("postId") int postId, Model model) {
+		Post post = postDAO.getPost(postId);
+		model.addAttribute("post", post);
+		return "post-detail";
+	}
+	
+	
+	@PostMapping("/editPost")
+	public String editPost(@ModelAttribute("post") Post post) {
+		
+		return "redirect:/post/list";
+	}
+	
+	
+	@PostMapping("/deletePost")
+	public String deletePost(@ModelAttribute("post") Post post) {
 		
 		return "redirect:/post/list";
 	}

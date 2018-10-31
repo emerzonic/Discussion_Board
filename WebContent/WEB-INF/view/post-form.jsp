@@ -62,15 +62,13 @@
 						    <label for="exampleFormControlTextarea1">Details</label>
 						    <form:textarea class="form-control" id="exampleFormControlTextarea1" rows="6" path="text"/>
 						  </div>
-						  <button type="button" class="btn btn-secondary btn-lg">Cancel</button>
+						  <a href="${pageContext.request.contextPath}/post/list"><button type="button" class="btn btn-secondary btn-lg">Cancel</button></a>
 						 <button type="submit" class="btn btn-primary btn-lg">Submit Post</button>
 					</form:form>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
