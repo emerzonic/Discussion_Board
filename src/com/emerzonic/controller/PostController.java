@@ -1,6 +1,7 @@
 package com.emerzonic.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ public class PostController {
 	@Autowired
 	private PostDAO postDAO;
 	
-	
+	//get all posts
 	@GetMapping("/list")
 	public String showPosts(Model model) {
 		//get posts from DAO
@@ -31,14 +32,16 @@ public class PostController {
 	}
 	
 	
-	@GetMapping("/showPostForm")
-	public String showPostForm(Model model) {
+	//get new post form
+	@GetMapping("/newPost")
+	public String newPost(Model model) {
 		Post post = new Post();
 		model.addAttribute("post", post);
 		return "post-form";
 	}
 	
 	
+	//add new post
 	@PostMapping("/addPost")
 	public String addPost(@ModelAttribute("post") Post post) {
 		postDAO.addPost(post);
@@ -46,24 +49,40 @@ public class PostController {
 	}
 	
 	
-	@GetMapping("/getPost")
-	public String getPost(@RequestParam("postId") int postId, Model model) {
-		Post post = postDAO.getPost(postId);
-		model.addAttribute("post", post);
+	
+	//get post details
+	@GetMapping("/detail")
+	public String postDetail(@RequestParam("postId")int postId,Model model) {
+		Post showPost = postDAO.getPost(postId);
+		model.addAttribute("post", showPost);
 		return "post-detail";
 	}
 	
 	
-	@PostMapping("/editPost")
-	public String editPost(@ModelAttribute("post") Post post) {
-		
-		return "redirect:/post/list";
+	
+	//get post to be edited
+	@GetMapping("/edit")
+	public String edit(@RequestParam("postId")int postId,Model model) {
+		Post showPost = postDAO.getPost(postId);
+		model.addAttribute("post", showPost);
+		return "edit-form";
 	}
 	
 	
-	@PostMapping("/deletePost")
-	public String deletePost(@ModelAttribute("post") Post post) {
-		
+	//update post
+	@PostMapping("/update")
+	public String updatePost(@ModelAttribute("post") Post post, Model model) {
+		Post updatedPost = postDAO.updatePost(post);
+		model.addAttribute("post", updatedPost);
+		return "post-detail";
+	}
+	
+	
+	
+	
+	@GetMapping("/delete")
+	public String deletePost(@RequestParam("postId") int postId) {
+		postDAO.deletePost(postId);
 		return "redirect:/post/list";
 	}
 }

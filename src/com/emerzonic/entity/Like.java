@@ -16,8 +16,8 @@ public class Like {
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="user_id")
-	private int userId;
+	@Column(name="author")
+	private String author;
 	
 	@Column(name="post_id")
 	private Integer postId;
@@ -30,8 +30,8 @@ public class Like {
 
 	public Like() {}
 	
-	public Like(int userId, Integer postId, Integer commentId, Integer replyId) {
-		this.userId = userId;
+	public Like(String author, int postId, Integer commentId, Integer replyId) {
+		this.author = author;
 		this.postId = postId;
 		this.commentId = commentId;
 		this.replyId = replyId;
@@ -48,13 +48,13 @@ public class Like {
 	}
 
 
-	public int getUserId() {
-		return userId;
+	public String getAuthor() {
+		return author;
 	}
 
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 
@@ -90,7 +90,7 @@ public class Like {
 
 	@Override
 	public String toString() {
-		return "Like [id=" + id + ", userId=" + userId + ", postId=" + postId + ", commentId=" + commentId
+		return "Like [id=" + id + ", author=" + author + ", postId=" + postId + ", commentId=" + commentId
 				+ ", replyId=" + replyId + "]";
 	}
 	

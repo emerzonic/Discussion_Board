@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,7 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="showPostForm"> Start a Conversation<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="newPost"> Start a Conversation<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Post Analytics</a>
@@ -43,19 +44,23 @@
 			<div class="col">
 					<div class="content">
 						<c:forEach var="post" items="${posts}">
-						<c:url var="readMoreLink" value="/post/getPost">										
+						<c:url var="readMore" value="/post/detail">
 							<c:param name="postId" value="${post.id}"/>
 						</c:url>
+						<c:set var="str" value="${fn:substring(post.text,1,200)}"/>
 								<div class="media">
 									<div class="media-body">
 										<div>
-											<h5 class="mt-0 mb-1">${ post.title } ${ post.date }</h5>
+											<h5 class="mt-0 mb-1">${ post.title }</h5>
 										</div>
 										<div>
-											<p class="post-detail">${ post.text}</p>
+											<h5 class="mt-0 mb-1">${ post.id } ${ post.date }</h5>
+										</div>
+										<div>
+											<p class="post-detail">${str}...</p>
 										</div>
 											
-										<a href="${readMoreLink}"><button type="button" class="btn btn-success">Read More</button></a>
+										<a href="${readMore}"><button type="button" class="btn btn-success">Read More</button></a>
 									</div>
 								</div>
 						</c:forEach>

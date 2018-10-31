@@ -1,5 +1,6 @@
 package com.emerzonic.entity;
 
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,8 +35,8 @@ import javax.persistence.Table;
 		private Date date;
 		
 		
-		@Column(name="user_id")
-		private int userId;
+		@Column(name="author")
+		private String author;
 		
 		@OneToMany(cascade=CascadeType.ALL)
 		@JoinColumn(name="post_id")
@@ -47,10 +48,10 @@ import javax.persistence.Table;
 		
 		public Post() {}
 
-		public Post(String title, String text, int userId) {
+		public Post(String title, String text, String author) {
 			this.title = title;
 			this.text = text;
-			this.userId = userId;
+			this.author = author;
 			this.date = new Timestamp(System.currentTimeMillis());
 		}
 
@@ -86,12 +87,12 @@ import javax.persistence.Table;
 			this.date = date;
 		}
 
-		public int getUserId() {
-			return userId;
+		public String getAuthor() {
+			return author;
 		}
 
-		public void setUserId(int userId) {
-			this.userId = userId;
+		public void setAuthor(String author) {
+			this.author = author;
 		}
 
 		public List<PostComment> getComments() {
@@ -127,7 +128,7 @@ import javax.persistence.Table;
 
 		@Override
 		public String toString() {
-			return "Post [id=" + id + ", title=" + title + ", text=" + text + ", date=" + date + ", userId=" + userId
+			return "Post [id=" + id + ", title=" + title + ", text=" + text + ", date=" + date + ", author=" + author
 					+ "]";
 		}
 

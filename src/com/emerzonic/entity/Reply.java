@@ -30,8 +30,8 @@ import javax.persistence.Table;
 		@Column(name="date")
 		private Date date;
 		
-		@Column(name="user_id")
-		private int userId;
+		@Column(name="author")
+		private String author;
 		
 		@Column(name="comment_id")
 		private int commentId;
@@ -42,10 +42,10 @@ import javax.persistence.Table;
 
 		public Reply() {}
 
-		public Reply(String text, int userId, int commentId) {
+		public Reply(String text, String author, int commentId) {
 			this.text = text;
 			this.date = new Timestamp(System.currentTimeMillis());
-			this.userId = userId;
+			this.author = author;
 			this.commentId = commentId;
 		}
 
@@ -73,12 +73,12 @@ import javax.persistence.Table;
 			this.date = date;
 		}
 
-		public int getUserId() {
-			return userId;
+		public String getAuthor() {
+			return author;
 		}
 
-		public void setUserId(int userId) {
-			this.userId = userId;
+		public void setAuthor(String author) {
+			this.author = author;
 		}
 
 		public int getCommentId() {
@@ -108,7 +108,7 @@ import javax.persistence.Table;
 
 		@Override
 		public String toString() {
-			return "Reply [id=" + id + ", text=" + text + ", date=" + date + ", userId=" + userId + ", commentId="
+			return "Reply [id=" + id + ", text=" + text + ", date=" + date + ", author=" + author + ", commentId="
 					+ commentId + "]";
 		}	
 

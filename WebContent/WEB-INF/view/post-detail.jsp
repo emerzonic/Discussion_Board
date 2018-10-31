@@ -43,17 +43,14 @@
 		<div class="col">
 					<div class="content">
 						<!-- set up edit link for post -->
-						<c:url var="addCommentLink" value="/post/getPost">
-							<c:param name="command" value="COMMENT"/>										
+						<c:url var="addCommentLink" value="/comment/new">
 							<c:param name="postId" value="${post.id}"/>
 						</c:url>
-						<c:url var="editPostLink" value="/post/getPost">
-							<c:param name="command" value="EDIT"/>										
+						<c:url var="editPostLink" value="/post/edit">
 							<c:param name="postId" value="${post.id}"/>
 						</c:url>
 						<!-- set up delete link for post -->
-						<c:url var="deletePostLink" value="/post/getPost">
-							<c:param name="command" value="DELETE"/>
+						<c:url var="deletePostLink" value="/post/delete">
 							<c:param name="postId" value="${post.id}"/>
 						</c:url>
 						

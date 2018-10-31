@@ -31,10 +31,7 @@ public class PostDAOImple implements PostDAO {
 		//create query
 		Query<Post> query = currentSession.createQuery("from Post order by date DESC",Post.class);
 		//execute query and get result
-		List <Post> posts = query.getResultList(); 
-		for(Post p: posts)
-			System.out.println(p.getLikes().size());
-
+		List <Post> posts = query.getResultList();
 		//return results
 		return posts;
 	}
@@ -48,10 +45,8 @@ public class PostDAOImple implements PostDAO {
 		int userId = 1;
 		User currentUser = currentSession.get(User.class, userId);
 		post.setDate(new Timestamp(System.currentTimeMillis()));
-		post.setUserId(currentUser.getId());
-		currentSession.save(post);
-		
-		
+		post.setAuthor(currentUser.getUsername());
+		currentSession.saveOrUpdate(post);
 	}
 
 
@@ -62,4 +57,32 @@ public class PostDAOImple implements PostDAO {
 		Post post = currentSession.get(Post.class, postId);
 		return post;
 	}
+
+	
+	@Override
+	@Transactional
+	public Post updatePost(Post post) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		//Hardcoding currentUser for now
+		int userId = 1;
+		User currentUser = currentSession.get(User.class, userId);
+		post.setDate(new Timestamp(System.currentTimeMillis()));
+		post.setAuthor(currentUser.getUsername());
+		currentSession.saveOrUpdate(post);
+		return post;
+	}
+
+	@Override
+	@Transactional
+	public void deletePost(int postId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Post post = currentSession.get(Post.class, postId);
+		
+		if (post != null) {
+			currentSession.delete(post);
+		}
+	}
+
+
+
 }

@@ -30,8 +30,8 @@ public class PostComment {
 	@Column(name="date")
 	private Date date;
 	
-	@Column(name="user_id")
-	private int userId;
+	@Column(name="author")
+	private String author;
 	
 	@Column(name="post_id")
 	private int postId;
@@ -46,10 +46,10 @@ public class PostComment {
 	
 	public PostComment() {}
 
-	public PostComment(String text, int userId, int postId) {
+	public PostComment(String text, String author, int postId) {
 		this.text = text;
 		this.date = new Timestamp(System.currentTimeMillis());
-		this.userId = userId;
+		this.author = author;
 		this.postId = postId;
 	}
 
@@ -77,12 +77,12 @@ public class PostComment {
 		this.date = date;
 	}
 
-	public int getUserId() {
-		return userId;
+	public String getAuthor() {
+		return author;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	public int getPostId() {
@@ -125,7 +125,7 @@ public class PostComment {
 
 	@Override
 	public String toString() {
-		return "PostComment [id=" + id + ", text=" + text + ", date=" + date + ", userId=" + userId + ", postId="
+		return "PostComment [id=" + id + ", text=" + text + ", date=" + date + ", author=" + author + ", postId="
 				+ postId + "]";
 	}	
 	
