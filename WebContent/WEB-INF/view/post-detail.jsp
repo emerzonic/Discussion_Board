@@ -58,7 +58,8 @@
 						 <div class="card border-info mb-3">
 						  <div class="card-header">Post Detail</div>
 						  <div class="card-body text-info">
-						    <h5 class="card-title">${post.title}</h5>
+						    <h3 class="card-title">${post.title}</h3>
+						    <span class="card-title">By ${post.author}</span> <span> Last Updated: ${post.date}</span>
 						    <hr>
 						    <p class="card-text">${post.text} </p>
 						    <hr>

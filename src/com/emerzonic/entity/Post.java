@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 	@Entity
 	@Table(name="post")
 	public class Post {
@@ -32,6 +34,7 @@ import javax.persistence.Table;
 		private String text;
 			
 		@Column(name="date")
+		@DateTimeFormat(pattern = "dd.MM.yyyy")
 		private Date date;
 		
 		
@@ -84,7 +87,7 @@ import javax.persistence.Table;
 		}
 
 		public void setDate(Date date) {
-			this.date = date;
+			this.date = new Timestamp(System.currentTimeMillis());
 		}
 
 		public String getAuthor() {

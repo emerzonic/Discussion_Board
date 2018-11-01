@@ -25,14 +25,10 @@ public class PostDAOImple implements PostDAO {
 	@Override
 	@Transactional
 	public List<Post> getAllPosts() {
-		//get curent hibernate session
+		//get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
-		
-		//create query
 		Query<Post> query = currentSession.createQuery("from Post order by date DESC",Post.class);
-		//execute query and get result
 		List <Post> posts = query.getResultList();
-		//return results
 		return posts;
 	}
 
@@ -64,12 +60,13 @@ public class PostDAOImple implements PostDAO {
 	public Post updatePost(Post post) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		//Hardcoding currentUser for now
-		int userId = 1;
-		User currentUser = currentSession.get(User.class, userId);
-		post.setDate(new Timestamp(System.currentTimeMillis()));
-		post.setAuthor(currentUser.getUsername());
+//		int userId = 1;
+//		User currentUser = currentSession.get(User.class, userId);
+//		post.setDate(new Timestamp(System.currentTimeMillis()));
+//		post.setAuthor(currentUser.getUsername());
+		System.out.println(post.toString());
 		currentSession.saveOrUpdate(post);
-		return post;
+		return getPost(post.getId());
 	}
 
 	@Override

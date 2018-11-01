@@ -54,7 +54,7 @@
 											<h5 class="mt-0 mb-1">${ post.title }</h5>
 										</div>
 										<div>
-											<h5 class="mt-0 mb-1">${ post.id } ${ post.date }</h5>
+											<h5 class="mt-0 mb-1">${ post.author }  ${ post.date }</h5>
 										</div>
 										<div>
 											<p class="post-detail">${str}...</p>
