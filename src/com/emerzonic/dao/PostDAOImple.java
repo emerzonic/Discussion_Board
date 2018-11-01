@@ -3,6 +3,8 @@ package com.emerzonic.dao;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.criteria.Fetch;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.emerzonic.entity.Post;
+import com.emerzonic.entity.PostComment;
 import com.emerzonic.entity.User;
 
 
@@ -40,14 +43,24 @@ public class PostDAOImple implements PostDAO {
 		User currentUser = currentSession.get(User.class, userId);
 		post.setDate(new Timestamp(System.currentTimeMillis()));
 		post.setAuthor(currentUser.getUsername());
-		currentSession.saveOrUpdate(post);
+		currentSession.save(post);
 	}
 
 
 	@Override
 	public Post getPost(int postId) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Post post = currentSession.get(Post.class, postId);
+//		Post post = currentSession.get(Post.class, postId);
+//		List <PostComment> comments = post.getComments();
+//		post.setComments(comments);
+//		List <Post> posts = query.getResultList();
+//		return posts;
+		
+		Query<Post> query = currentSession.createQuery("SELECT p from Post p "
+														+ "JOIN FETCH p.comments "
+														+ "WHERE p.id=:postId",Post.class);
+		query.setParameter("postId", postId);
+		Post post = query.getSingleResult();
 		return post;
 	}
 

@@ -16,34 +16,38 @@ public class PostServiceImpli implements PostService {
 	@Autowired
 	private PostDAO postDAO;
 	
-	@Transactional
 	@Override
+	@Transactional
 	public List<Post> getAllPosts() {
 		return postDAO.getAllPosts();
 	}
 	
-	@Transactional
+	
 	@Override
+	@Transactional
 	public void addPost(Post post) {
 		postDAO.addPost(post);
 	}
 	
 	
-	@Transactional
+	
 	@Override
+	@Transactional
 	public Post getPost(int postId) {
 		return postDAO.getPost(postId);
 	}
 
-	@Transactional
+
 	@Override
+	@Transactional
 	public Post updatePost(Post post) {
 		return postDAO.updatePost(post);
 	}
 	
 	
-	@Transactional
+	
 	@Override
+	@Transactional
 	public void deletePost(int postId) {
 		postDAO.deletePost(postId);
 	}
