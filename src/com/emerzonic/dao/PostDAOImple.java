@@ -46,15 +46,14 @@ public class PostDAOImple implements PostDAO {
 		currentSession.save(post);
 	}
 
-
+	
 	@Override
 	public Post getPost(int postId) {
-		Session currentSession = sessionFactory.getCurrentSession();		
-		Query<Post> query = currentSession.createQuery("SELECT p from Post p "
-														+ "JOIN FETCH p.comments "
-														+ "WHERE p.id=:postId",Post.class);
-		query.setParameter("postId", postId);
-		Post post = query.getSingleResult();
+		Session currentSession = sessionFactory.getCurrentSession();
+		Post post = currentSession.get(Post.class, postId);
+		post.getComments();
+		post.setComments(post.getComments());
+		System.out.println(post.getComments().toString());
 		return post;
 	}
 

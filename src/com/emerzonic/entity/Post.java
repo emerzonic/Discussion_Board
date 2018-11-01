@@ -132,7 +132,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 		@Override
 		public String toString() {
 			return "Post [id=" + id + ", title=" + title + ", text=" + text + ", date=" + date + ", author=" + author
-					+ "]";
+					+"]";
 		}
 
 		
