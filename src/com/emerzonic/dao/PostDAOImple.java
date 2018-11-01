@@ -23,7 +23,6 @@ public class PostDAOImple implements PostDAO {
 	
 	
 	@Override
-	@Transactional
 	public List<Post> getAllPosts() {
 		//get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -34,7 +33,6 @@ public class PostDAOImple implements PostDAO {
 
 
 	@Override
-	@Transactional
 	public void addPost(Post post) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		//Hardcoding currentUser for now
@@ -47,7 +45,6 @@ public class PostDAOImple implements PostDAO {
 
 
 	@Override
-	@Transactional
 	public Post getPost(int postId) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		Post post = currentSession.get(Post.class, postId);
@@ -56,21 +53,13 @@ public class PostDAOImple implements PostDAO {
 
 	
 	@Override
-	@Transactional
 	public Post updatePost(Post post) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		//Hardcoding currentUser for now
-//		int userId = 1;
-//		User currentUser = currentSession.get(User.class, userId);
-//		post.setDate(new Timestamp(System.currentTimeMillis()));
-//		post.setAuthor(currentUser.getUsername());
-		System.out.println(post.toString());
-		currentSession.saveOrUpdate(post);
+		currentSession.update(post);
 		return getPost(post.getId());
 	}
 
 	@Override
-	@Transactional
 	public void deletePost(int postId) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		Post post = currentSession.get(Post.class, postId);

@@ -1,7 +1,6 @@
 package com.emerzonic.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,21 +11,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.emerzonic.dao.PostDAO;
 import com.emerzonic.entity.Post;
+import com.emerzonic.service.PostService;
 
 @Controller
 @RequestMapping("/post")
 public class PostController {
-	//inject DAO
+	//inject PostService
 	@Autowired
-	private PostDAO postDAO;
+	private PostService PostService;
+	
 	
 	//get all posts
 	@GetMapping("/list")
 	public String showPosts(Model model) {
 		//get posts from DAO
-		List<Post> posts = postDAO.getAllPosts();
+		List<Post> posts = PostService.getAllPosts();
 		model.addAttribute("posts", posts);
 		return "show-posts";
 	}
@@ -44,7 +44,7 @@ public class PostController {
 	//add new post
 	@PostMapping("/addPost")
 	public String addPost(@ModelAttribute("post") Post post) {
-		postDAO.addPost(post);
+		PostService.addPost(post);
 		return "redirect:/post/list";
 	}
 	
@@ -53,7 +53,7 @@ public class PostController {
 	//get post details
 	@GetMapping("/detail")
 	public String postDetail(@RequestParam("postId")int postId,Model model) {
-		Post showPost = postDAO.getPost(postId);
+		Post showPost = PostService.getPost(postId);
 		model.addAttribute("post", showPost);
 		return "post-detail";
 	}
@@ -63,7 +63,7 @@ public class PostController {
 	//get post to be edited
 	@GetMapping("/edit")
 	public String edit(@RequestParam("postId")int postId,Model model) {
-		Post showPost = postDAO.getPost(postId);
+		Post showPost = PostService.getPost(postId);
 		model.addAttribute("post", showPost);
 		return "edit-form";
 	}
@@ -72,7 +72,7 @@ public class PostController {
 	//update post
 	@PostMapping("/update")
 	public String updatePost(@ModelAttribute("post") Post post, Model model) {
-		Post updatedPost = postDAO.updatePost(post);
+		Post updatedPost = PostService.updatePost(post);
 		model.addAttribute("post", updatedPost);
 		return "post-detail";
 	}
@@ -82,7 +82,7 @@ public class PostController {
 	
 	@GetMapping("/delete")
 	public String deletePost(@RequestParam("postId") int postId) {
-		postDAO.deletePost(postId);
+		PostService.deletePost(postId);
 		return "redirect:/post/list";
 	}
 }
