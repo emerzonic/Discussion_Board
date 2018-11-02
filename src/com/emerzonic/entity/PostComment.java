@@ -48,7 +48,7 @@ public class PostComment {
 
 	public PostComment(String text, String author, int postId) {
 		this.text = text;
-		this.date = new Timestamp(System.currentTimeMillis());
+		this.date = (Date) new Timestamp(System.currentTimeMillis());
 		this.author = author;
 		this.postId = postId;
 	}

@@ -44,7 +44,7 @@ import javax.persistence.Table;
 
 		public Reply(String text, String author, int commentId) {
 			this.text = text;
-			this.date = new Timestamp(System.currentTimeMillis());
+			this.date = (Date) new Timestamp(System.currentTimeMillis());
 			this.author = author;
 			this.commentId = commentId;
 		}

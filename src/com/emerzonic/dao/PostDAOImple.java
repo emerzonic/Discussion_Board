@@ -1,19 +1,15 @@
 package com.emerzonic.dao;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
-
-import javax.persistence.criteria.Fetch;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.emerzonic.entity.Post;
-import com.emerzonic.entity.PostComment;
 import com.emerzonic.entity.User;
 
 
@@ -41,7 +37,6 @@ public class PostDAOImple implements PostDAO {
 		//Hardcoding currentUser for now
 		int userId = 1;
 		User currentUser = currentSession.get(User.class, userId);
-		post.setDate(new Timestamp(System.currentTimeMillis()));
 		post.setAuthor(currentUser.getUsername());
 		currentSession.save(post);
 	}
@@ -61,6 +56,7 @@ public class PostDAOImple implements PostDAO {
 	@Override
 	public Post updatePost(Post post) {
 		Session currentSession = sessionFactory.getCurrentSession();
+		post.setDate(LocalDate.now());
 		currentSession.update(post);
 		return getPost(post.getId());
 	}

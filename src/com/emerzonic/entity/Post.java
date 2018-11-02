@@ -1,9 +1,8 @@
 package com.emerzonic.entity;
 
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,7 +34,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 			
 		@Column(name="date")
 		@DateTimeFormat(pattern = "dd.MM.yyyy")
-		private Date date;
+		private LocalDate date;
 		
 		
 		@Column(name="author")
@@ -55,7 +54,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 			this.title = title;
 			this.text = text;
 			this.author = author;
-			this.date = new Timestamp(System.currentTimeMillis());
+			this.date = getDate();
 		}
 
 		public int getId() {
@@ -82,12 +81,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 			this.text = text;
 		}
 
-		public Date getDate() {
-			return date;
+
+		public LocalDate getDate() {
+			return LocalDate.now();
 		}
 
-		public void setDate(Date date) {
-			this.date = new Timestamp(System.currentTimeMillis());
+		public void setDate(LocalDate date) {
+			this.date = date;
 		}
 
 		public String getAuthor() {
@@ -133,10 +133,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 		public String toString() {
 			return "Post [id=" + id + ", title=" + title + ", text=" + text + ", date=" + date + ", author=" + author
 					+"]";
-		}
-
-		
-		
+		}	
 	}
 	
 	

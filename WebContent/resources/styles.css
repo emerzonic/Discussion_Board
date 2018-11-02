@@ -2,3 +2,8 @@
 body{
 	background-color:light-gray;
 }
+
+
+.comment-form{
+	border:2px solid red;
+}
