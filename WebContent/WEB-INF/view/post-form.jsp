@@ -3,10 +3,8 @@
 
 <!DOCTYPE html>
 <html>
-
 <%@ include file="head.jsp" %>
 <body>
-	
 <%@ include file="header.jsp" %>
 	<div class="container">
 		<div class="row">
