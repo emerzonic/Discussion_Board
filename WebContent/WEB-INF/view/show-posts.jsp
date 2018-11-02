@@ -20,10 +20,10 @@
 								<div class="media">
 									<div class="media-body">
 										<div>
-											<h5 class="mt-0 mb-1">${ post.title }</h5>
+											<h3 class="mt-0 mb-1">${ post.title }</h3>
 										</div>
 										<div>
-											<h5 class="mt-0 mb-1">${ post.author }  ${ post.date }</h5>
+											<span class="mt-0 mb-1">By ${ post.author } posted on ${ post.dateString }</span>
 										</div>
 										<div>
 											<p class="post-detail">${str}...</p>

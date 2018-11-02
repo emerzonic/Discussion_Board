@@ -1,8 +1,8 @@
 package com.emerzonic.entity;
 
 import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="comment")
@@ -27,8 +28,11 @@ public class PostComment {
 	@Column(name="text")
 	private String text;
 		
-	@Column(name="date")
-	private Date date;
+	@Column(name="created_on",nullable = false, updatable = false)
+	private Timestamp createdOn;
+	
+	@Transient
+	private String dateString;
 	
 	@Column(name="author")
 	private String author;
@@ -48,9 +52,11 @@ public class PostComment {
 
 	public PostComment(String text, String author, int postId) {
 		this.text = text;
-		this.date = (Date) new Timestamp(System.currentTimeMillis());
 		this.author = author;
 		this.postId = postId;
+		this.createdOn = new Timestamp(
+	            System.currentTimeMillis()
+	        );
 	}
 
 	public int getId() {
@@ -69,12 +75,25 @@ public class PostComment {
 		this.text = text;
 	}
 
-	public Date getDate() {
-		return date;
+	public Timestamp getCreatedOn() {
+		return createdOn;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setCreatedOn(Timestamp createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public String getDateString() {
+        if(dateString == null) {
+        	dateString = DateTimeFormatter
+        			.ofPattern("E, MMM. dd yyyy 'at' h:mm a")
+        			.format(createdOn.toLocalDateTime());
+        }
+        return dateString;
+	}
+
+	public void setDateString(String dateString) {
+		this.dateString = dateString;
 	}
 
 	public String getAuthor() {
@@ -125,8 +144,10 @@ public class PostComment {
 
 	@Override
 	public String toString() {
-		return "PostComment [id=" + id + ", text=" + text + ", date=" + date + ", author=" + author + ", postId="
-				+ postId + "]";
-	}	
+		return "PostComment [id=" + id + ", text=" + text + ", createdOn=" + createdOn + ", dateString=" + dateString
+				+ ", author=" + author + ", postId=" + postId + "]";
+	}
+
+	
 	
 }

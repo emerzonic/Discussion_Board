@@ -31,8 +31,8 @@
 						<div class="card-header">Post Detail</div>
 						<div class="card-body text-info">
 							<h3 class="card-title">${post.title}</h3>
-							<span class="card-title">By ${post.author}</span> <span>
-								Last Updated: ${post.date}</span>
+							<span class="card-title">By ${post.author}</span>  <span>
+								posted on ${post.dateString}</span>
 							<hr>
 							<p class="card-text">${post.text}</p>
 							<hr>
@@ -53,8 +53,8 @@
 						<!--NEW COMMENT FORM BELOW-->
 						<form:form id="commentForm" class="comment-form" action="addComment" method="POST">
 							<div class="form-group">
-								<textarea id="comment" class="form-control" id="exampleFormControlTextarea1"
-									rows="3"></textarea>
+								<textarea id="commentInput" class="form-control comment-input border-bottom rounded-0" id="exampleFormControlTextarea1"
+									rows="1" placeholder="Add comment to this post"></textarea>
 							</div>
 							<a href="${pageContext.request.contextPath}/post/list"><button
 									type="button" class="btn btn-secondary btn-sm">Cancel</button></a>
@@ -73,14 +73,14 @@
 								<div class="media">
 									<div class="media-body">
 										<div>
-											<h5 class="mt-0 mb-1">${comment.author}${ comment.date }</h5>
+											<span class="mt-1 mb-2">${comment.author} commented ${ comment.dateString }</span>
 										</div>
 										<div>
 											<p class="post-detail">${comment.text}</p>
 										</div>
 										<hr>
-										<a href="${readMore}"><button type="button"
-												class="btn btn-success">Read More</button></a>
+										<%-- <a href="${readMore}"><button type="button"
+												class="btn btn-success">Read More</button></a> --%>
 									</div>
 								</div>
 							</c:forEach>

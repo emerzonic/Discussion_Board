@@ -17,8 +17,6 @@
 					</div>
 					<form:form action="update" modelAttribute="post" method="POST">
 						<form:hidden   path="id"/>
-						<form:hidden  path="date"/>
- 						<form:hidden  path="author"/> 
  						<c:url var="detail" value="/post/detail">
 							<c:param name="postId" value="${post.id}"/>
 						</c:url>

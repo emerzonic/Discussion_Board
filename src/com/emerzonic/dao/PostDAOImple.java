@@ -1,6 +1,5 @@
 package com.emerzonic.dao;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -25,7 +24,7 @@ public class PostDAOImple implements PostDAO {
 	public List<Post> getAllPosts() {
 		//get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query<Post> query = currentSession.createQuery("from Post order by date DESC",Post.class);
+		Query<Post> query = currentSession.createQuery("from Post order by created_on DESC",Post.class);
 		List <Post> posts = query.getResultList();
 		return posts;
 	}
@@ -38,6 +37,8 @@ public class PostDAOImple implements PostDAO {
 		int userId = 1;
 		User currentUser = currentSession.get(User.class, userId);
 		post.setAuthor(currentUser.getUsername());
+		post.setCreatedOn();
+		System.out.println("\n"+post.toString());
 		currentSession.save(post);
 	}
 
@@ -56,8 +57,13 @@ public class PostDAOImple implements PostDAO {
 	@Override
 	public Post updatePost(Post post) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		post.setDate(LocalDate.now());
-		currentSession.update(post);
+		currentSession.createQuery("UPDATE Post set title = :title, text = :text " + "WHERE id = :postId")
+		   .setParameter("title",post.getTitle())
+		   .setParameter("text",post.getText())
+		   .setParameter("postId",post.getId())
+		   .executeUpdate();
+		
+//		currentSession.update(post);
 		return getPost(post.getId());
 	}
 

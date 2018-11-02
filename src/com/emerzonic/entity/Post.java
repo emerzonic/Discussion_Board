@@ -1,7 +1,8 @@
 package com.emerzonic.entity;
 
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +15,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.annotations.DynamicUpdate;
 
 	@Entity
 	@Table(name="post")
+	@DynamicUpdate
 	public class Post {
 			
 		@Id
@@ -32,10 +35,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 		@Column(name="text")
 		private String text;
 			
-		@Column(name="date")
-		@DateTimeFormat(pattern = "dd.MM.yyyy")
-		private LocalDate date;
+		@Column(name="created_on",nullable = false, updatable = false)
+		private Timestamp createdOn;
 		
+		@Transient
+		private String dateString;
 		
 		@Column(name="author")
 		private String author;
@@ -48,13 +52,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 		@JoinColumn(name="post_id")
 		private List<Like> likes;
 		
-		public Post() {}
+		public Post() {
+			
+		}
 
 		public Post(String title, String text, String author) {
 			this.title = title;
 			this.text = text;
 			this.author = author;
-			this.date = getDate();
 		}
 
 		public int getId() {
@@ -80,14 +85,28 @@ import org.springframework.format.annotation.DateTimeFormat;
 		public void setText(String text) {
 			this.text = text;
 		}
-
-
-		public LocalDate getDate() {
-			return LocalDate.now();
+		
+		public Timestamp getCreatedOn() {
+			return createdOn;
 		}
 
-		public void setDate(LocalDate date) {
-			this.date = date;
+		public void setCreatedOn() {
+			this.createdOn = new Timestamp(
+		            System.currentTimeMillis()
+		        );
+		}
+
+		public String getDateString() {
+	        if(dateString == null) {
+	        	dateString = DateTimeFormatter
+	        			.ofPattern("E, MMM. dd yyyy 'at' h:mm a")
+	        			.format(createdOn.toLocalDateTime());
+	        }
+	        return dateString;
+		}
+
+		public void setDateString(String dateString) {
+			this.dateString = dateString;
 		}
 
 		public String getAuthor() {
@@ -131,9 +150,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 		@Override
 		public String toString() {
-			return "Post [id=" + id + ", title=" + title + ", text=" + text + ", date=" + date + ", author=" + author
-					+"]";
-		}	
+			return "Post [id=" + id + ", title=" + title + ", text=" + text + ", createdOn=" + createdOn
+					+ ", dateString=" + dateString + ", author=" + author + "]";
+		}
+	
 	}
 	
 	

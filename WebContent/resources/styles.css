@@ -4,6 +4,16 @@ body{
 }
 
 
-.comment-form{
-	border:2px solid red;
+.comment-input{
+	border: none;
+	border-bottom:0.09rem solid LightGray;
+	outline:none;
+	outline-style: none;
+    outline-width: 0rem;
+    outline-color:white;
+	
+}
+
+.comment-input:focus{
+	border-bottom:0.1rem solid black;
 }
