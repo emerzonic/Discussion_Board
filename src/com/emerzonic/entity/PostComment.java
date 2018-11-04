@@ -17,46 +17,45 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="comment")
+@Table(name = "comment")
 public class PostComment {
-		
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
-		
-	@Column(name="text")
+
+	@Column(name = "text")
 	private String text;
-		
-	@Column(name="created_on",nullable = false, updatable = false)
+
+	@Column(name = "created_on", nullable = false, updatable = false)
 	private Timestamp createdOn;
-	
+
 	@Transient
 	private String dateString;
-	
-	@Column(name="author")
+
+	@Column(name = "author")
 	private String author;
-	
-	@Column(name="post_id")
+
+	@Column(name = "post_id")
 	private int postId;
-	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="comment_id")
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "comment_id")
 	private List<Reply> replies;
-	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="comment_id")
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "comment_id")
 	private List<Like> likes;
-	
-	public PostComment() {}
+
+	public PostComment() {
+	}
 
 	public PostComment(String text, String author, int postId) {
 		this.text = text;
 		this.author = author;
 		this.postId = postId;
-		this.createdOn = new Timestamp(
-	            System.currentTimeMillis()
-	        );
+		this.createdOn = new Timestamp(System.currentTimeMillis());
 	}
 
 	public int getId() {
@@ -79,17 +78,12 @@ public class PostComment {
 		return createdOn;
 	}
 
-	public void setCreatedOn(Timestamp createdOn) {
-		this.createdOn = createdOn;
-	}
 
 	public String getDateString() {
-        if(dateString == null) {
-        	dateString = DateTimeFormatter
-        			.ofPattern("E, MMM. dd yyyy 'at' h:mm a")
-        			.format(createdOn.toLocalDateTime());
-        }
-        return dateString;
+		if (dateString == null) {
+			dateString = DateTimeFormatter.ofPattern("E, MMM. dd yyyy").format(createdOn.toLocalDateTime());
+		}
+		return dateString;
 	}
 
 	public void setDateString(String dateString) {
@@ -127,14 +121,14 @@ public class PostComment {
 	public void setLikes(List<Like> likes) {
 		this.likes = likes;
 	}
-	
+
 	public void add(Reply newReply) {
 		if (replies == null) {
 			replies = new ArrayList<>();
 		}
 		replies.add(newReply);
 	}
-	
+
 	public void toggleLike(Like newLike) {
 		if (likes == null) {
 			likes = new ArrayList<>();
@@ -148,6 +142,4 @@ public class PostComment {
 				+ ", author=" + author + ", postId=" + postId + "]";
 	}
 
-	
-	
 }

@@ -13,19 +13,33 @@
 					<div>
 						<h3>New Post Form</h3>
 					</div>
+					<div class="new-post-content">
+					<hr>
 					<form:form action="addPost" modelAttribute="post" method="POST">
 						<div class="form-group">
 						    <label for="exampleInputText">Post Title</label>
-						    <form:input type="text" class="form-control" id="exampleInputText" aria-describedby="textHelp" placeholder="Please provide a title for your post" path="title"/>
+						    <form:input 
+						    	type="text" 
+						    	class="form-control post-title-input rounded-0" 
+						    	id="postTitleInput" 
+						    	aria-describedby="textHelp" 
+						    	placeholder="Please provide a title for your post..." 
+						    	path="title"/>
 						    <small id="textHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 						</div>
 						 <div class="form-group">
 						    <label for="exampleFormControlTextarea1">Details</label>
-						    <form:textarea class="form-control" id="exampleFormControlTextarea1" rows="6" path="text"/>
+						    <form:textarea 
+						    	class="form-control post-text-input rounded-0" 
+						    	id="postTextInput" path="text" 
+						    	placeholder="Enter post detail here..."/>
 						  </div>
-						  <a href="${pageContext.request.contextPath}/post/list"><button type="button" class="btn btn-secondary btn-lg">Cancel</button></a>
+						 	<a href="${pageContext.request.contextPath}/post/list">
+						  	<button type="button" 
+						  			class="btn btn-lg cancel-button">Cancel</button></a>
 						 <button type="submit" class="btn btn-primary btn-lg">Submit Post</button>
 					</form:form>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -1,53 +1,36 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-		<link type="text/css" rel="stylesheet" href="${pageContent.request.contextPath}/assets/css/styles.css"> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>The Discussion Board</title>
+<link type="text/css" rel="stylesheet"
+	href="<c:url value="/resources/font-awesome.min.css"/>">
+<!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+ -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link type="text/css" rel="stylesheet"
+	href="<c:url value="/resources/styles.css"/>">
+
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">DB</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+	<div class="header-image card bg-dark text-white text-center">
+		<img class="card-img"
+			src="<c:url value="/resources/images/header_background.jpg"/>"
+			alt="Card image">
+		<div class="card-img-overlay d-flex flex-column justify-content-center">
+			<h1 class="display-4">The Discussion Board</h1>
+			<p class="lead">A place where everyone can express and exchange their views.</p>
+			<hr class="my-1 text-primary">
+			<a class="btn btn-primary btn-lg w-25 mx-auto" href="post/list" role="button">Join
+				The Conversation</a>
 
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="showPostForm"> Start a Conversation<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Post Analytics</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Profile</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search topics">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
-<div class="container-fluid">
-	<div class="row">
-			<div class="col">
-					<div class="content">
-						<div class="jumbotron">
-							  <h1 class="display-4">Welcome! Join the Discussion</h1>
-							  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-							  <hr class="my-4">
-							  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-							  <a class="btn btn-primary btn-lg" href="post/list" role="button">Join The Conversation</a>
-							</div>
-				</div>
-			</div>
+		</div>
 	</div>
-</div>
-
-
 </body>
 </html>

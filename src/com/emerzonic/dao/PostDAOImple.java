@@ -47,8 +47,8 @@ public class PostDAOImple implements PostDAO {
 	public Post getPost(int postId) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		Post post = currentSession.get(Post.class, postId);
-		post.getComments();
 		post.setComments(post.getComments());
+		post.setLikes(post.getLikes());
 		System.out.println(post.getComments().toString());
 		return post;
 	}
