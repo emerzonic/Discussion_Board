@@ -32,10 +32,17 @@ body{
 	padding:0;
 }
 
+ .reply-text-input{
+	border: none;
+	border-bottom:0.09rem solid LightGray;	
+	padding:0;
+}
+
 .comment-input:focus{
 	border-bottom:0.1rem solid black;
     box-shadow: none;
 }
+
 
 .post-title-input:focus{
 	border-bottom:0.1rem solid black;
@@ -43,6 +50,11 @@ body{
 }
 
 .post-text-input:focus{
+	border-bottom:0.1rem solid black;
+    box-shadow: none;
+}
+
+.reply-text-input:focus{
 	border-bottom:0.1rem solid black;
     box-shadow: none;
 }
@@ -80,5 +92,13 @@ body{
 
 label{
 	font-weight:bold;
+}
+
+.reply-form{
+	visibility:hidden;
+}
+
+.reply-link:hover .reply-form{
+	visibility:visible;
 }
 

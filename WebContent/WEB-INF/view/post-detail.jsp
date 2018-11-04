@@ -43,8 +43,8 @@
 									class="btn btn-warning btn-sm px-lg-5">Edit</button></a>
 							<c:set var="commentNumber" value="${fn:length(post.comments)}" />
 							<span class="ml-3 mr-1"><i class="fa fa-thumbs-up"
-								aria-hidden="true"></i></span><span class="">23</span> <span
-								class="ml-3 mr-1"> <i class="fa fa-comments"
+								aria-hidden="true"></i></span><span class="">${post.likes.size()}</span>
+							<span class="ml-3 mr-1"> <i class="fa fa-comments"
 								aria-hidden="true"> ${commentNumber} </i> comments
 							</span>
 						</div>
@@ -81,7 +81,7 @@
 								<c:url var="readMore" value="/post/detail">
 									<c:param name="postId" value="${post.id}" />
 								</c:url>
-								<div class="d-flex">
+								<div class="d-flex shadow-sm mt-4 pb-4">
 									<div style="width: 8%;">
 										<h3 class="rounded-circle text-center mr-3 p-3"
 											style="height: 25%; background: red;">E</h3>
@@ -90,7 +90,7 @@
 										<div class="w-100">
 											<span class="mr-2 comment-author">${comment.author}</span> <span
 												class="comment-date">${ comment.dateString }</span>
-											<hr class="mt-1">
+											<!-- <hr class="mt-1"> -->
 										</div>
 										<div class="w-100 d-flex">
 											<div style="width: 95%;">
@@ -111,12 +111,31 @@
 											</div>
 										</div>
 										<div class="w-100">
-											<span class="mr-4"><i class="fa fa-thumbs-up"
-												aria-hidden="true"></i></span><span class="">Reply</span>
+											<span class="mr-4"><i class="fa fa-thumbs-up mr-1"
+												aria-hidden="true"></i>${comment.likes.size()}</span><span class="reply-link">Reply</span>
 										</div>
 									</div>
 								</div>
-								<hr>
+								<form:form id="replyForm" class="reply-form"
+									action="addComment" method="POST">
+									<input id="postId" type="hidden" name="parentPostId"
+										value="${comment.id}" />
+									<div class="form-group">
+										<textarea id="replyInput" name="text"
+											class="form-control comment-input rounded-0"
+											id="exampleFormControlTextarea1"
+											placeholder="Add comment to this post...">
+							 </textarea>
+									</div>
+									<div class="d-flex justify-content-end">
+										<button type="button" id="cancelButton"
+											class="btn btn-sm cancel-button">CANCEL</button>
+										<button type="submit"
+											class="btn btn-primary btn-sm submit-button">COMMENT</button>
+									</div>
+
+								</form:form>
+
 							</c:forEach>
 						</c:if>
 					</div>

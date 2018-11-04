@@ -50,6 +50,7 @@ public class PostDAOImple implements PostDAO {
 		post.setComments(post.getComments());
 		post.setLikes(post.getLikes());
 		System.out.println(post.getComments().toString());
+		System.out.println(post.getLikes().toString());
 		return post;
 	}
 

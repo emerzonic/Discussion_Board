@@ -17,7 +17,7 @@ public class Like {
 	private int id;
 	
 	@Column(name="author")
-	private String author;
+	private String  author;
 	
 	@Column(name="post_id")
 	private Integer postId;
@@ -30,7 +30,7 @@ public class Like {
 
 	public Like() {}
 	
-	public Like(String author, int postId, Integer commentId, Integer replyId) {
+	public Like(String author, Integer postId, Integer commentId, Integer replyId) {
 		this.author = author;
 		this.postId = postId;
 		this.commentId = commentId;

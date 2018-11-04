@@ -3,15 +3,19 @@ package com.emerzonic.entity;
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -40,13 +44,14 @@ public class PostComment {
 	@Column(name = "post_id")
 	private int postId;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name = "comment_id")
 	private List<Reply> replies;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name = "comment_id")
-	private List<Like> likes;
+	@MapKey(name = "author")
+	private Map<String, Like> likes;
 
 	public PostComment() {
 	}
@@ -55,7 +60,7 @@ public class PostComment {
 		this.text = text;
 		this.author = author;
 		this.postId = postId;
-		this.createdOn = new Timestamp(System.currentTimeMillis());
+		setCreatedOn();
 	}
 
 	public int getId() {
@@ -74,8 +79,8 @@ public class PostComment {
 		this.text = text;
 	}
 
-	public Timestamp getCreatedOn() {
-		return createdOn;
+	public void setCreatedOn() {
+		this.createdOn = new Timestamp(System.currentTimeMillis());
 	}
 
 
@@ -114,11 +119,11 @@ public class PostComment {
 		this.replies = replies;
 	}
 
-	public List<Like> getLikes() {
+	public Map<String, Like> getLikes() {
 		return likes;
 	}
 
-	public void setLikes(List<Like> likes) {
+	public void setLikes(Map<String, Like> likes) {
 		this.likes = likes;
 	}
 
@@ -131,9 +136,17 @@ public class PostComment {
 
 	public void toggleLike(Like newLike) {
 		if (likes == null) {
-			likes = new ArrayList<>();
+			likes = new HashMap<>();
 		}
-		likes.add(newLike);
+		String authorkey = newLike.getAuthor();
+		Like like = likes.get(authorkey);
+		if (like == null) {
+			likes.put(authorkey, newLike);
+			System.out.println("like added");
+		} else {
+			likes.remove(authorkey);
+			System.out.println("like removed");
+		}
 	}
 
 	@Override

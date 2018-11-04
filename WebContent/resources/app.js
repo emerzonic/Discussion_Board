@@ -1,6 +1,7 @@
 autosize(document.getElementById("commentInput"));
 autosize(document.getElementById("postTitleInput"));
 autosize(document.getElementById("postTextInput"));
+autosize(document.getElementById("replyInput"));
 
 $("#commentForm").submit(function(event) {
 	// event.preventDefault();
