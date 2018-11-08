@@ -31,10 +31,7 @@ public class CommentController {
 	
 	//add new comment
 	@PostMapping("/addComment")
-//	@ResponseBody
-	public String addComment(@RequestParam("parentPostId")int postId, 
-                             @RequestParam("text") String comment, 
-                             Model model) {
+	public String addComment(@RequestParam("parentPostId")int postId, @RequestParam("text") String comment, Model model) {
 		commentService.addComment(postId, comment);
 		Post post = postService.getPost(postId);
 		model.addAttribute("post", post);
