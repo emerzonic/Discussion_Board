@@ -66,6 +66,8 @@
 	
 	<!-- Support for reading web assets: CSS, JS, images etc -->
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
+	
+	
 </beans>
 
 

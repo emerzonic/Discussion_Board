@@ -16,4 +16,6 @@ public interface PostDAO {
 
 	public Post updatePost(Post post);
 
+	public List<Post> searchPost(String searchTerm);
+
 }

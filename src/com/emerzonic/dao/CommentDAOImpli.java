@@ -23,9 +23,34 @@ public class CommentDAOImpli implements CommentDAO {
 		Post post = currentSession.get(Post.class, postId);
 		PostComment newComment = new PostComment(comment, currentUser.getUsername(), postId);
 		post.add(newComment);
-		System.out.println("\n"+newComment.toString());
 		currentSession.save(post);
 		
+	}
+
+	@Override
+	public PostComment getComment(int commentId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		PostComment comment = currentSession.get(PostComment.class, commentId);
+		return comment;
+	}
+
+	@Override
+	public void updateComment(int postId, PostComment comment) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Post post = currentSession.get(Post.class, postId);
+		currentSession.createQuery("UPDATE PostComment set text = :text " + "WHERE id = :commentId")
+		   .setParameter("text",comment.getText())
+		   .setParameter("commentId",comment.getId())
+		   .executeUpdate();
+		currentSession.save(post);
+		
+	}
+
+	@Override
+	public void deleteComment(int commentId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		PostComment comment = currentSession.get(PostComment.class, commentId);
+		currentSession.delete(comment);
 	}
 
 }

@@ -2,6 +2,8 @@ autosize(document.getElementById("commentInput"));
 autosize(document.getElementById("postTitleInput"));
 autosize(document.getElementById("postTextInput"));
 autosize(document.getElementById("replyInput"));
+autosize(document.getElementById("editPostTitleInput"));
+autosize(document.getElementById("editPostTextInput"));
 
 $("#commentForm").submit(function(event) {
 	// event.preventDefault();
@@ -27,3 +29,18 @@ $("#commentForm").submit(function(event) {
 $("#cancelButton").click(function() {
 	$("#commentInput").val("");
 });
+
+$("#reply-link").click(function() {
+	$("#replyForm").removeClass("d-none");
+});
+
+$(function() {
+	$(document).scroll(function() {
+		var $nav = $("#mainNav");
+		if ($(window).scrollTop() > $nav.height()) {
+			$nav.addClass("bg-dark");
+		} else {
+			$nav.removeClass("bg-dark");
+		}
+	})
+})

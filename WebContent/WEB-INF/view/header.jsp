@@ -1,5 +1,5 @@
 <!-- 	NAVBAR STARTS -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav id="mainNav" class="navbar navbar-expand-lg navbar-dark fixed-top">
 	<div class="container">
 		<a class="navbar-brand" href="/discussion-board">DB</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -21,24 +21,30 @@
 <!-- NAVBAR ENDS -->
 
 <!-- HEADER STARTS -->
-<div class="jumbotron jumbotron-fluid text-center mx-auto">
+<div class="jumbotron jumbotron-fluid top-header text-center mx-auto">
 	<div class="container p-lg-5">
-		<div><h1 class="display-4">Join The Discussion</h1></div>
-		<div><a href="newPost"><button class="btn btn-success newpost-button 
-					my-4" type="button">Start a Conversation</button></a></div>
-		
 		<div>
-			<form>
-				<div class="row">
-					<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-						<input class="form-control search-input mr-2 d-flex justify-content-center" type="search" placeholder="Search topics">
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pl-lg-0 pl-md-0 pl-xl-0">
-						<button class="btn btn-outline-success search-submit 
-						my-3 my-sm-3 mt-md-0 mt-lg-0 mt-xl-0 
-						" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+			<h1 class="display-4 pt-5">Join The Discussion</h1>
+		</div>
+		<div>
+			<a href="/discussion-board/post/new"><button
+					class="btn btn-success newpost-button 
+					my-4" type="button">Start
+					a Conversation</button></a>
+		</div>
+
+		<div>
+			<c:url var="search" value="/post/search"/>
+			<form action="${search}"  method="POST">
+				<div class="input-group mb-3 px-lg-5 px-xl-5">
+					<input type="text" name="searchTerm" class="form-control"
+						placeholder="Search topics"
+						aria-label="search_terms" aria-describedby="basic-addon2">
+					<div class="input-group-append">
+						<button type="submit" class="input-group-text" id="basic-addon2"><i class="fa fa-search" aria-hidden="true"></i></button>
 					</div>
 				</div>
+
 			</form>
 		</div>
 	</div>

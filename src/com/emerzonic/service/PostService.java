@@ -15,4 +15,6 @@ public interface PostService {
 	public Post updatePost(Post post);
 
 	public void deletePost(int postId);
+
+	public List<Post> searchPosts(String searchTerm);
 }

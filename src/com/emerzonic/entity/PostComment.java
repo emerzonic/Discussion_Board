@@ -44,7 +44,7 @@ public class PostComment {
 	@Column(name = "post_id")
 	private int postId;
 
-	@OneToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "comment_id")
 	private List<Reply> replies;
 

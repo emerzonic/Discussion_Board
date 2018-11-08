@@ -15,9 +15,10 @@ import com.emerzonic.entity.Post;
 import com.emerzonic.entity.PostComment;
 import com.emerzonic.service.CommentService;
 import com.emerzonic.service.PostService;
+import com.util.PostCommentUtil;
 
 @Controller
-@RequestMapping("/post")
+@RequestMapping("/comment")
 public class CommentController {
 	//inject PostService
 	@Autowired
@@ -30,6 +31,7 @@ public class CommentController {
 	
 	//add new comment
 	@PostMapping("/addComment")
+//	@ResponseBody
 	public String addComment(@RequestParam("parentPostId")int postId, 
 							 @RequestParam("text") String comment, Model model) {
 		commentService.addComment(postId, comment);
@@ -39,40 +41,41 @@ public class CommentController {
 	}
 	
 	
+	//get comment to be edited
+	@GetMapping("/edit")
+	public String editComment(@RequestParam("postId")int postId,
+							  @RequestParam("commentId")int commentId,Model model) {
+		PostComment comment = commentService.getComment(commentId);
+		Post post = postService.getPost(postId);
+		PostCommentUtil postcomment = new PostCommentUtil();
+		postcomment.setPost(post);
+		postcomment.setComment(comment);
+		post.add(comment);
+		model.addAttribute("postcomment", postcomment);
+		return "edit-comment";
+	}
+
 	
-//	//get post details
-//	@GetMapping("/detail")
-//	public String postDetail(@RequestParam("postId")int postId,Model model) {
-//		PostComment showPost = PostService.getPost(postId);
-//		model.addAttribute("post", showPost);
-//		return "post-detail";
-//	}
-//	
-//	
-//	
-//	//get post to be edited
-//	@GetMapping("/edit")
-//	public String edit(@RequestParam("postId")int postId,Model model) {
-//		Post showPost = PostService.getPost(postId);
-//		model.addAttribute("post", showPost);
-//		return "edit-form";
-//	}
-//	
-//	
-//	//update post
-//	@PostMapping("/update")
-//	public String updatePost(@ModelAttribute("post") Post post, Model model) {
-//		Post updatedPost = PostService.updatePost(post);
-//		model.addAttribute("post", updatedPost);
-//		return "post-detail";
-//	}
-//	
-//	
-//	
-//	
-//	@GetMapping("/delete")
-//	public String deletePost(@RequestParam("postId") int postId) {
-//		PostService.deletePost(postId);
-//		return "redirect:/post/list";
-//	}
+	//update comment mapping
+	@PostMapping("/update")
+	public String updateComment(@ModelAttribute("postcomment") PostCommentUtil post, 
+								Model model) {
+		int postId = post.getPost().getId();
+		PostComment comment = post.getComment();
+		commentService.updateComment(postId, comment);
+		Post updatedPost = postService.getPost(postId);
+		model.addAttribute("post", updatedPost);
+		return "post-detail";
+	}
+
+	//delete comment mapping
+	@GetMapping("/delete")
+	public String deleteComment(@RequestParam("commentId") int commentId,
+								@RequestParam("postId") int postId,
+								Model model) {
+		commentService.deleteComment(commentId);
+		Post post = postService.getPost(postId);
+		model.addAttribute("post", post);
+		return "post-detail";
+	}
 }

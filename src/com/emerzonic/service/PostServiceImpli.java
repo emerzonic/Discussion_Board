@@ -51,6 +51,13 @@ public class PostServiceImpli implements PostService {
 	public void deletePost(int postId) {
 		postDAO.deletePost(postId);
 	}
+
+
+	@Override
+	@Transactional
+	public List<Post> searchPosts(String searchTerm) {
+		return postDAO.searchPost(searchTerm);
+	}
 	
 	
 }

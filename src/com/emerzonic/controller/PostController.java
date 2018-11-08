@@ -31,9 +31,18 @@ public class PostController {
 		return "show-posts";
 	}
 	
+	//get all posts
+	@PostMapping("/search")
+	public String searchPosts(@RequestParam("searchTerm") String searchTerm,Model model)  {
+		System.out.println(searchTerm);
+		List<Post> posts = PostService.searchPosts(searchTerm);
+		model.addAttribute("posts", posts);
+		return  "show-posts";
+	}
+	
 	
 	//get new post form
-	@GetMapping("/newPost")
+	@GetMapping("/new")
 	public String newPost(Model model) {
 		Post post = new Post();
 		model.addAttribute("post", post);
@@ -76,8 +85,6 @@ public class PostController {
 		model.addAttribute("post", updatedPost);
 		return "post-detail";
 	}
-	
-	
 	
 	
 	@GetMapping("/delete")

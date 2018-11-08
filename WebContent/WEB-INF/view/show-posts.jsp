@@ -8,21 +8,21 @@
 <body>
 	
 <%@ include file="header.jsp" %>
-<div class="container">
+<div class="container px-5">
 	<div class="row">
-			<div class="col">
+			<div class="col-lg-10 justify-content-center mx-auto">
 					<div class="content">
 						<c:forEach var="post" items="${posts}">
 						<c:url var="readMore" value="/post/detail">
 							<c:param name="postId" value="${post.id}"/>
 						</c:url>
-						<c:set var="str" value="${fn:substring(post.text,1,200)}"/>
-								<div class="media">
+						<c:set var="str" value="${fn:substring(post.text,0,200)}"/>
+								<div class="media my-2 bg-warning p-4 rounded">
 									<div class="media-body">
-										<div>
+										<div class="border-bottom">
 											<h3 class="mt-0 mb-1">${ post.title }</h3>
 										</div>
-										<div>
+										<div class="border-bottom">
 											<span class="mt-0 mb-1">By ${ post.author } posted on ${ post.dateString }</span>
 										</div>
 										<div>

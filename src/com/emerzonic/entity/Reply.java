@@ -42,7 +42,7 @@ import javax.persistence.Transient;
 		@Column(name="comment_id")
 		private int commentId;
 		
-		@OneToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
+		@OneToMany(cascade = CascadeType.ALL)
 		@JoinColumn(name="reply_id")
 		@MapKey(name = "author")
 		private Map<String, Like> likes;

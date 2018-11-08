@@ -1,16 +1,36 @@
 
 body{
 	background-color:light-gray;
+	
 }
 
-.jumbotron{
+.navbar.bg-dark{
+	transition: background 1500ms;
+}
+
+
+.top-header{
 	background-image:url("../resources/images/header_background.jpg");
 	background-repeat:no-repeat;
 	background-size:cover;
 	color:#FFFF;
-	
+/* 	margin-top:200px;
+ */	
 }
 
+.footer{
+	background:#5e8598;
+	color:black;
+	height:auto;
+	}
+
+
+.home-footer{
+	background:white;
+	color:#5e8598;;
+	height:auto;
+	}
+	
 /* to be combined into one selector */
  .comment-input{
 	border: none;
@@ -90,9 +110,15 @@ body{
     letter-spacing:2;
 }
 
+.submit-button{
+	background-color:#5e8598;
+	border-color:#5e8598;
+	color:white;
+}
+
 label{
 	font-weight:bold;
-}
+/* }
 
 .reply-form{
 	visibility:hidden;
@@ -100,5 +126,5 @@ label{
 
 .reply-link:hover .reply-form{
 	visibility:visible;
-}
+} */
 

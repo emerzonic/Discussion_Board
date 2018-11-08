@@ -14,8 +14,8 @@
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
 				<div class="content">
-					<!-- set up edit link for post -->
-					<c:url var="addCommentLink" value="/comment/new">
+					<!-- set up link variables -->
+					<c:url var="addCommentLink" value="/comment/addComment">
 						<c:param name="postId" value="${post.id}" />
 					</c:url>
 					<c:url var="editPostLink" value="/post/edit">
@@ -27,23 +27,23 @@
 					</c:url>
 
 					<!--POST DETAIL DISPLAYS BELOW-->
-					<div class="card border-info mb-3">
+					<div class="card border-info mb-3 p-3">
 						<div class="card-header">${post.title}</div>
 						<div class="card-body text-info">
-							<span class="card-title">By ${post.author}</span> <span>
-								posted on ${post.dateString}</span>
-							<hr class="mt-0.5">
+							<span class="card-title">By ${post.author}</span> 
+							<span>posted on ${post.dateString}</span>
+							<hr class="mt-1">
 							<p class="card-text">${post.text}</p>
 							<hr>
-							<a href="${pageContext.request.contextPath}/post/list"><button
-									type="button" class="btn btn-secondary btn-sm px-lg-1">Back
-									To Posts</button></a> <a href="${deletePostLink}"><button type="button"
-									class="btn btn-danger btn-sm px-lg-5">Delete</button></a> <a
-								href="${editPostLink}"><button type="button"
-									class="btn btn-warning btn-sm px-lg-5">Edit</button></a>
-							<c:set var="commentNumber" value="${fn:length(post.comments)}" />
-							<span class="ml-3 mr-1"><i class="fa fa-thumbs-up"
-								aria-hidden="true"></i></span><span class="">${post.likes.size()}</span>
+							<a href="${pageContext.request.contextPath}/post/list">
+								<button type="button" class="btn btn-secondary btn-sm px-lg-1">Back To Posts</button></a> 
+								<a href="${deletePostLink}"><button type="button" class="btn btn-danger btn-sm px-lg-5">Delete</button></a> 
+								<a href="${editPostLink}"><button type="button" class="btn btn-warning btn-sm px-lg-5">Edit</button></a>
+								<c:if test="${not empty post.comments}">
+									<c:set var="commentNumber" value="${fn:length(post.comments)}" />
+								</c:if>
+							<button type="button" class="btn btn-link"><span class="ml-3 mr-1"><i class="fa fa-thumbs-up"
+								aria-hidden="true"></i></span><span class="">${post.likes.size()}</span></button>
 							<span class="ml-3 mr-1"> <i class="fa fa-comments"
 								aria-hidden="true"> ${commentNumber} </i> comments
 							</span>
@@ -53,7 +53,7 @@
 
 						<!--NEW COMMENT FORM BELOW-->
 						<form:form id="commentForm" class="comment-form"
-							action="addComment" method="POST">
+							action="${addCommentLink}" method="POST">
 							<input id="postId" type="hidden" name="parentPostId"
 								value="${post.id}" />
 							<div class="form-group">
@@ -64,10 +64,8 @@
 							 </textarea>
 							</div>
 							<div class="d-flex justify-content-end">
-								<button type="button" id="cancelButton"
-									class="btn btn-sm cancel-button">CANCEL</button>
-								<button type="submit"
-									class="btn btn-primary btn-sm submit-button">COMMENT</button>
+								<button type="button" id="cancelButton" class="btn btn-sm cancel-button">CANCEL</button>
+								<button type="submit" class="btn btn-primary btn-sm submit-button">COMMENT</button>
 							</div>
 
 						</form:form>
@@ -98,44 +96,74 @@
 											</div>
 											<div class="btn-group d-flex align-items-center"
 												style="width: 5%;">
+												<c:url var="editCommentLink" value="/comment/edit">
+													<c:param name="commentId" value="${comment.id}" />
+													<c:param name="postId" value="${post.id}" />
+												</c:url>
+												<c:url var="deleteCommentLink" value="/comment/delete">
+													<c:param name="commentId" value="${comment.id}" />
+													<c:param name="postId" value="${post.id}" />
+												</c:url>
 												<i class="fa fa-ellipsis-v pl-4" data-toggle="dropdown"
 													aria-hidden="true"></i>
 												<div class="dropdown-menu">
 													<ul class="list-group">
 														<li class="list-group-item list-group-item-action"><a
-															href="#">Edit</a></li>
+															href="${editCommentLink}">Edit</a></li>
 														<li class="list-group-item list-group-item-action"><a
-															href="#">Delete</a></li>
+															href="${deleteCommentLink}">Delete</a></li>
 													</ul>
 												</div>
 											</div>
 										</div>
 										<div class="w-100">
-											<span class="mr-4"><i class="fa fa-thumbs-up mr-1"
-												aria-hidden="true"></i>${comment.likes.size()}</span><span class="reply-link">Reply</span>
+											<a href="#"><button type="button" class="btn btn-link"><span class="ml-3 mr-1"><i class="fa fa-thumbs-up"
+								aria-hidden="true"></i></span><span class="">${post.likes.size()}</span></button></a>
+											<!-- 												<span class="reply-link">Reply</span>
+ -->
 										</div>
 									</div>
 								</div>
-								<form:form id="replyForm" class="reply-form"
-									action="addComment" method="POST">
-									<input id="postId" type="hidden" name="parentPostId"
-										value="${comment.id}" />
-									<div class="form-group">
-										<textarea id="replyInput" name="text"
-											class="form-control comment-input rounded-0"
-											id="exampleFormControlTextarea1"
-											placeholder="Add comment to this post...">
-							 </textarea>
-									</div>
-									<div class="d-flex justify-content-end">
-										<button type="button" id="cancelButton"
-											class="btn btn-sm cancel-button">CANCEL</button>
-										<button type="submit"
-											class="btn btn-primary btn-sm submit-button">COMMENT</button>
-									</div>
+								<%-- 								<div class="mt-2" style="padding-left: 15%;">
+									<form:form id="replyForm" class="reply-form" action="addReply"
+										method="POST">
+										<input id="postId" type="hidden" name="parentPostId"
+											value="${comment.id}" />
+										<div class="form-group">
+											<textarea id="replyInput" name="text"
+												class="form-control comment-input rounded-0"
+												id="exampleFormControlTextarea1"
+												placeholder="Add comment to this post...">
+							 				</textarea>
+										</div>
+										<div class="d-flex justify-content-end">
+										<c:set var="replyCount" value="${fn:length(comment.replies)}" />
+											<button class="btn btn-link" type="button"
+												data-toggle="collapse" data-target="#collapseOne${comment.id}"
+												aria-expanded="true" aria-controls="collapseOne">
+												View ${commentCount} Replies</button>
+											<button type="button" id="cancelButton"
+												class="btn btn-sm cancel-button">CANCEL</button>
+											<button type="submit"
+												class="btn btn-primary btn-sm submit-button">COMMENT</button>
+										</div>
 
-								</form:form>
+									</form:form>
+								</div> --%>
 
+								<%-- <div class="accordion border-0" id="accordionExample">
+									<div id="collapseOne${comment.id}" class="collapse hide"
+										aria-labelledby="headingOne" data-parent="#accordionExample">
+										<div class="card-body">
+											<c:set var="replies" value="${comment.replies}" />
+											<c:if test="${not empty replies}">
+												<c:forEach var="reply" items="${replies}">
+														${reply.text}
+												</c:forEach>
+											</c:if>
+										</div>
+									</div>
+								</div> --%>
 							</c:forEach>
 						</c:if>
 					</div>
