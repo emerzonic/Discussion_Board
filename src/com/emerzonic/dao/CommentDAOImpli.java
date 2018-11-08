@@ -24,8 +24,8 @@ public class CommentDAOImpli implements CommentDAO {
 		PostComment newComment = new PostComment(comment, currentUser.getUsername(), postId);
 		post.add(newComment);
 		currentSession.save(post);
-		
 	}
+	
 
 	@Override
 	public PostComment getComment(int commentId) {
@@ -33,6 +33,7 @@ public class CommentDAOImpli implements CommentDAO {
 		PostComment comment = currentSession.get(PostComment.class, commentId);
 		return comment;
 	}
+	
 
 	@Override
 	public void updateComment(int postId, PostComment comment) {
@@ -43,8 +44,8 @@ public class CommentDAOImpli implements CommentDAO {
 		   .setParameter("commentId",comment.getId())
 		   .executeUpdate();
 		currentSession.save(post);
-		
 	}
+	
 
 	@Override
 	public void deleteComment(int commentId) {

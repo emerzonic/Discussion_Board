@@ -7,15 +7,15 @@
 <%@ include file="header.jsp" %>
 	<div class="container">
 		<div class="row">
-			<div class="col">
-				<div class="content w-75 mx-auto border p-5 mb-5 rounded">
-					<div class="border-bottom bg-success p-2">
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto border rounded">
+				<div class="content p-xl-5 p-lg-5 p-md-4 p-sm-4 p-xs-3">
+					<div class="border-bottom ">
 						<h3>Edit Comment</h3>
 					</div>
 					<c:url var="update" value="/comment/update"/>
 					<form:form action="${update}" modelAttribute="postcomment" method="POST">
-						<form:input  name="postId" path="post.id"/>
-						<form:input  name="commentId" path="comment.id"/>
+						<form:hidden  name="postId" path="post.id"/>
+						<form:hidden  name="commentId" path="comment.id"/>
  						<c:url var="detail" value="/post/detail">
 							<c:param name="postId" value="${post.id}"/>
 						</c:url> 

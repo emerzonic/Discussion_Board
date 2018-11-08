@@ -8,8 +8,8 @@
 <%@ include file="header.jsp" %>
 	<div class="container">
 		<div class="row">
-			<div class="col">
-				<div class="content w-75 mx-auto border p-5 mb-5 rounded">
+			<div class="col-">
+				<div class="content mx-auto border p-5 mb-5 rounded">
 					<div>
 						<h3>New Post Form</h3>
 					</div>

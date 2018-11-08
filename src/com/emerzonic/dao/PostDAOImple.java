@@ -46,9 +46,8 @@ public class PostDAOImple implements PostDAO {
 	public Post getPost(int postId) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		Post post = currentSession.get(Post.class, postId);
-//		post.setComments(post.getComments());
-//		post.setLikes(post.getLikes()); added eager loading for testing
-
+		post.setComments(post.getComments());
+		post.setLikes(post.getLikes()); 
 		return post;
 	}
 
@@ -61,10 +60,9 @@ public class PostDAOImple implements PostDAO {
 		   .setParameter("text",post.getText())
 		   .setParameter("postId",post.getId())
 		   .executeUpdate();
-		
-//		currentSession.update(post);
 		return getPost(post.getId());
 	}
+	
 
 	@Override
 	public void deletePost(int postId) {
@@ -81,13 +79,12 @@ public class PostDAOImple implements PostDAO {
         Session currentSession = sessionFactory.getCurrentSession();
         Query query = null;
         if (searchTerm != null && searchTerm.trim().length() > 0) {
-            // search for firstName or lastName ... case insensitive
+            // search a post title for a keyword... case insensitive
             query = currentSession.createQuery("from Post where lower(title) like :searchTerm", Post.class);
             query.setParameter("searchTerm", "%" + searchTerm.toLowerCase() + "%");
         }
         else {
-            // search is empty ... so just get all post
-        	query = currentSession.createQuery("from Post", Post.class);            
+        	return null;
         }
         List<Post> posts = query.getResultList();
         return posts;
