@@ -41,9 +41,7 @@ public class CommentController {
 	
 	//get comment to be edited
 	@GetMapping("/edit")
-	public String editComment(@RequestParam("postId")int postId,
-							  @RequestParam("commentId")int commentId,
-							  Model model) {
+	public String editComment(@RequestParam("postId")int postId, @RequestParam("commentId")int commentId, Model model) {
 		PostComment comment = commentService.getComment(commentId);
 		Post post = postService.getPost(postId);
 		PostCommentUtil postcomment = new PostCommentUtil();
@@ -57,8 +55,7 @@ public class CommentController {
 	
 	//update comment mapping
 	@PostMapping("/update")
-	public String updateComment(@ModelAttribute("postcomment") PostCommentUtil post, 
-                                Model model) {
+	public String updateComment(@ModelAttribute("postcomment") PostCommentUtil post, Model model) {
 		int postId = post.getPost().getId();
 		PostComment comment = post.getComment();
 		commentService.updateComment(postId, comment);
@@ -69,9 +66,7 @@ public class CommentController {
 
 	//delete comment mapping
 	@GetMapping("/delete")
-	public String deleteComment(@RequestParam("commentId") int commentId,
-                                @RequestParam("postId") int postId,
-                                Model model) {
+	public String deleteComment(@RequestParam("commentId") int commentId, @RequestParam("postId") int postId, Model model) {
 		commentService.deleteComment(commentId);
 		Post post = postService.getPost(postId);
 		model.addAttribute("post", post);
