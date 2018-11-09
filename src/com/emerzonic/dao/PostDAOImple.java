@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.emerzonic.entity.Post;
 import com.emerzonic.entity.User;
+import com.emerzonic.service.PostService;
 
 
 @Repository
@@ -44,7 +45,7 @@ public class PostDAOImple implements PostDAO {
 	
 	@Override
 	public Post getPost(int postId) {
-		Session currentSession = sessionFactory.getCurrentSession();
+		Session currentSession = sessionFactory.openSession();
 		Post post = currentSession.get(Post.class, postId);
 		post.setComments(post.getComments());
 		post.setLikes(post.getLikes()); 

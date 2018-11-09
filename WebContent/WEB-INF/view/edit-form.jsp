@@ -21,8 +21,8 @@
  						<div class="form-group">
 						    <label for="editPostTitleInput">Post Title</label>
 						    <form:input type="text" class="form-control post-title-input rounded-0" id="editPostTitleInput" aria-describedby="textHelp" path="title" value="${post.title}"/>
-						    <small id="textHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-						</div>
+<!-- 						    <small id="textHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+ -->						</div>
 						 <div class="form-group">
 						    <label for="editPostTextInput">Details</label>
 						    <form:textarea class="form-control post-text-input rounded-0" id="editPostTextInput" path="text" value="${post.text}"/>

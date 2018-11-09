@@ -47,11 +47,11 @@ public class Post {
 	@Column(name = "author")
 	private String author;
 
-	@OneToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "post_id")
 	private List<PostComment> comments;
 
-	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "post_id")
 	@MapKey(name = "author")
 	private Map<String, Like> likes;

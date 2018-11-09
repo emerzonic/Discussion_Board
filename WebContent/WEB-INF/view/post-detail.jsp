@@ -57,11 +57,7 @@
 							<input id="postId" type="hidden" name="parentPostId"
 								value="${post.id}" />
 							<div class="form-group">
-								<textarea id="commentInput" name="text"
-									class="form-control comment-input rounded-0"
-									id="exampleFormControlTextarea1"
-									placeholder="Add comment to this post...">
-							 </textarea>
+								<textarea id="commentInput" name="text" class="form-control comment-input rounded-0 pb-0" id="exampleFormControlTextarea1" placeholder="Add comment to this post..."></textarea>
 							</div>
 							<div class="d-flex justify-content-end">
 								<button type="button" id="cancelButton" class="btn btn-sm cancel-button">CANCEL</button>
@@ -81,8 +77,9 @@
 								</c:url>
 								<div class="d-flex shadow-sm mt-4 pb-4">
 									<div style="width: 8%;">
-										<h3 class="rounded-circle text-center mr-3 p-3"
-											style="height: 25%; background: red;">E</h3>
+									<img class="rounded-circle" src="../resources/images/thumbnail.png" />
+										<!-- <h3 class="rounded-circle text-center mr-3 p-3"
+											style="height: 25%; background: red;">E</h3> -->
 									</div>
 									<div class="d-flex flex-column" style="width: 92%;">
 										<div class="w-100">
