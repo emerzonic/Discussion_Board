@@ -38,6 +38,7 @@
         <property name="user" value="nlf6gdha9ffmw48g" />
         <property name="password" value="ol2e9w3jyxr4rzn4" /> 
         
+        
        <!--  dev db -->
       <!--   <property name="user" value="root" />
         <property name="password" value="root" />  -->
