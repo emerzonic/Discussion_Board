@@ -25,13 +25,13 @@ public class PostController {
 	//get all posts
 	@GetMapping("/list")
 	public String showPosts(Model model) {
-		//get posts from DAO
+		//get posts from postService
 		List<Post> posts = PostService.getAllPosts();
 		model.addAttribute("posts", posts);
 		return "show-posts";
 	}
 	
-	//get all posts
+	//search posts
 	@PostMapping("/search")
 	public String searchPosts(@RequestParam("searchTerm") String searchTerm,Model model)  {
 		System.out.println(searchTerm);

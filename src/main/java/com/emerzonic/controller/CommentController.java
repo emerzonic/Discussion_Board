@@ -27,7 +27,6 @@ public class CommentController {
 	private PostService postService;
 	
 	
-	
 	//add new comment
 	@PostMapping("/addComment")
 	public String addComment(@RequestParam("parentPostId")int postId, @RequestParam("text") String comment, Model model) {
