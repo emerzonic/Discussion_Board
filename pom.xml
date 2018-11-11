@@ -11,7 +11,8 @@
 		<springframework.version>4.3.4.RELEASE</springframework.version>
 		<hibernate.version>5.2.5.Final</hibernate.version>
 		<mysql.connector.version>5.1.40</mysql.connector.version>
-	</properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
 	<dependencies>
 		<!-- Spring -->
@@ -117,7 +118,6 @@
 									<destFileName>webapp-runner.jar</destFileName>
 								</artifactItem>
 							</artifactItems>
-							<encoding>UTF-8</encoding>
 						</configuration>
 					</execution>
 				</executions>
