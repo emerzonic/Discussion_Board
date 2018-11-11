@@ -1,8 +1,5 @@
-com/emerzonic/service/PostServiceImpli.class
 com/emerzonic/util/PostCommentUtil.class
 com/emerzonic/entity/Reply.class
-com/emerzonic/dao/CommentDAOImpli.class
-com/emerzonic/dao/CommentDAO.class
 com/emerzonic/dao/PostDAOImple.class
 com/emerzonic/service/CommentService.class
 com/emerzonic/entity/Post.class
@@ -11,6 +8,9 @@ com/emerzonic/service/PostService.class
 com/emerzonic/dao/PostDAO.class
 com/emerzonic/service/CommentServiceImpli.class
 com/emerzonic/controller/PostController.class
+com/emerzonic/entity/Like.class
+com/emerzonic/service/PostServiceImpli.class
+com/emerzonic/dao/CommentDAOImpli.class
+com/emerzonic/dao/CommentDAO.class
 com/emerzonic/entity/PostComment.class
 com/emerzonic/entity/User.class
-com/emerzonic/entity/Like.class
