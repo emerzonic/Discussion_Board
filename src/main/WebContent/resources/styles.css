@@ -118,8 +118,20 @@ body{
 
 label{
 	font-weight:bold;
-/* }
+}
 
+.post-list-content.media{
+	background-color:#f1f6f7;
+}
+
+textarea{
+	height:2rem;
+}
+
+.thumbnail-box{
+	width:5rem;
+}
+/* 
 .reply-form{
 	visibility:hidden;
 }
@@ -127,4 +139,4 @@ label{
 .reply-link:hover .reply-form{
 	visibility:visible;
 } */
-
+ */

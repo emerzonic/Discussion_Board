@@ -26,8 +26,7 @@ public class PostDAOImple implements PostDAO {
 		//get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query<Post> query = currentSession.createQuery("from Post order by created_on DESC",Post.class);
-		List <Post> posts = query.getResultList();
-		return posts;
+		return query.getResultList();
 	}
 
 
@@ -87,7 +86,6 @@ public class PostDAOImple implements PostDAO {
         else {
         	return null;
         }
-        List<Post> posts = query.getResultList();
-        return posts;
+        return query.getResultList();
 	}
 }

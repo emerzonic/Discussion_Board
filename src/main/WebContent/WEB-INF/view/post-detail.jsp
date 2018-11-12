@@ -36,9 +36,9 @@
 							<p class="card-text">${post.text}</p>
 							<hr>
 							<a href="${pageContext.request.contextPath}/post/list">
-								<button type="button" class="btn btn-secondary btn-sm px-lg-1">Back To Posts</button></a> 
-								<a href="${deletePostLink}"><button type="button" class="btn btn-danger btn-sm px-lg-5">Delete</button></a> 
-								<a href="${editPostLink}"><button type="button" class="btn btn-warning btn-sm px-lg-5">Edit</button></a>
+								<button type="button" class="btn btn-link btn-lg px-lg-2">Back To Posts</button></a> 
+								<a href="${deletePostLink}"><button type="button" class="btn btn-link btn-lg px-lg-2">Delete</button></a> 
+								<a href="${editPostLink}"><button type="button" class="btn btn-link btn-lg px-lg-2">Edit</button></a>
 								<c:if test="${not empty post.comments}">
 									<c:set var="commentNumber" value="${fn:length(post.comments)}" />
 								</c:if>
@@ -76,23 +76,22 @@
 									<c:param name="postId" value="${post.id}" />
 								</c:url>
 								<div class="d-flex shadow-sm mt-4 pb-4">
-									<div style="width: 8%;">
-									<img class="rounded-circle" src="../resources/images/thumbnail.png" />
+									<div class="thumbnail-box border">
+										<img class="rounded-circle img-fluid" src="../resources/images/thumbnail.png" />
 										<!-- <h3 class="rounded-circle text-center mr-3 p-3"
 											style="height: 25%; background: red;">E</h3> -->
 									</div>
-									<div class="d-flex flex-column" style="width: 92%;">
-										<div class="w-100">
+									<div class="d-flex flex-column col-11 border">
+										<div class="col-12">
 											<span class="mr-2 comment-author">${comment.author}</span> <span
 												class="comment-date">${ comment.dateString }</span>
 											<!-- <hr class="mt-1"> -->
 										</div>
 										<div class="w-100 d-flex">
-											<div style="width: 95%;">
+											<div class="col-11 border">
 												<p class="comment-text">${comment.text}</p>
 											</div>
-											<div class="btn-group d-flex align-items-center"
-												style="width: 5%;">
+											<div class="btn-group d-flex align-items-center col-1 border">
 												<c:url var="editCommentLink" value="/comment/edit">
 													<c:param name="commentId" value="${comment.id}" />
 													<c:param name="postId" value="${post.id}" />
@@ -113,7 +112,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="w-100">
+										<div class="col-12 border">
 											<a href="#"><button type="button" class="btn btn-link"><span class="ml-3 mr-1"><i class="fa fa-thumbs-up"
 								aria-hidden="true"></i></span><span class="">${post.likes.size()}</span></button></a>
 											<!-- 												<span class="reply-link">Reply</span>

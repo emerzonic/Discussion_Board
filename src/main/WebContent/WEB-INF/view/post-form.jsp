@@ -8,13 +8,12 @@
 <%@ include file="header.jsp" %>
 	<div class="container">
 		<div class="row">
-			<div class="col-">
-				<div class="content mx-auto border p-5 mb-5 rounded">
-					<div>
+			<div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto">
+				<div class="content mx-auto border p-5 mb-5 rounded shadow-sm">
+					<div class="pb-0 border-bottom">
 						<h3>New Post Form</h3>
 					</div>
-					<div class="new-post-content">
-					<hr>
+					<div class="new-post-content mt-2">
 					<c:url var="add" value="/post/addPost"/>
 					<form:form action="${add}" modelAttribute="post" method="POST">
 						<div class="form-group">
@@ -26,7 +25,7 @@
 						    	aria-describedby="textHelp" 
 						    	placeholder="Please provide a title for your post..." 
 						    	path="title"/>
-						    <small id="textHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+						    <small id="textHelp" class="form-text text-muted"></small>
 						</div>
 						 <div class="form-group">
 						    <label for="exampleFormControlTextarea1">Details</label>

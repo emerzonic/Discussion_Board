@@ -30,8 +30,8 @@ public class CommentDAOImpli implements CommentDAO {
 	@Override
 	public PostComment getComment(int commentId) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		PostComment comment = currentSession.get(PostComment.class, commentId);
-		return comment;
+		return currentSession.get(PostComment.class, commentId);
+		
 	}
 	
 
