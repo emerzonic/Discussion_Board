@@ -31,7 +31,6 @@ public class CommentDAOImpli implements CommentDAO {
 	public PostComment getComment(int commentId) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		return currentSession.get(PostComment.class, commentId);
-		
 	}
 	
 
